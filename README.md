@@ -29,20 +29,22 @@ php -S localhost:8000
 
 ## 📁 Project Structure
 
-\`\`\`
+```
 employee-directory/
-├── index.html                           # Main HTML file (for direct browser use)
-├── src/main/resources/
-│   ├── templates/
-│   │   └── index.ftlh                   # Freemarker template
-│   └── static/
-│       ├── css/
-│       │   └── style.css                # Main stylesheet
-│       └── js/
-│           ├── data.js                  # Mock employee data
-│           └── app.js                   # Main application logic
+├── index.html                         # Main HTML file (for direct browser use)
+├── src/
+│   └── main/
+│       └── resources/
+│           ├── templates/
+│           │   └── index.ftlh         # Freemarker template
+│           └── static/
+│               ├── css/
+│               │   └── style.css      # Main stylesheet
+│               └── js/
+│                   ├── data.js        # Mock employee data
+│                   └── app.js         # Main application logic
 └── README.md
-\`\`\`
+```
 
 ## ✨ Features
 
