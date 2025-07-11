@@ -9,23 +9,6 @@ A modern, responsive web application for managing employee information with full
 2. Open `index.html` directly in your web browser
 3. The application will work immediately with all features
 
-### Method 2: Local HTTP Server
-If you need to test the Freemarker template:
-
-
-\`\`\`
-
-**Using Node.js:**
-\`\`\`bash
-npx serve .
-# Open browser to http://localhost:3000
-\`\`\`
-
-**Using PHP:**
-\`\`\`bash
-php -S localhost:8000
-# Open browser to http://localhost:8000
-\`\`\`
 
 ## 📁 Project Structure
 
