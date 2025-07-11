@@ -4,7 +4,7 @@ A modern, responsive web application for managing employee information with full
 
 ## 🚀 Setup and Run Instructions
 
-### Method 1: Direct Browser (Recommended)
+### Direct Browser
 1. Download/clone this repository
 2. Open `index.html` directly in your web browser
 3. The application will work immediately with all features
