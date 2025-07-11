@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Directory</title>
+    <link rel="stylesheet" href="src/main/resources/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-left">
+                        <h1 class="header-title">
+                            <span class="header-icon">👥</span>
+                            Employee Directory
+                        </h1>
+                        <p class="header-subtitle">Manage your team efficiently</p>
+                    </div>
+                    <button id="add-employee-btn" class="btn btn-primary btn-add">
+                        <span class="btn-icon">+</span>
+                        Add Employee
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="main">
+            <div class="container">
+                <!-- Stats Cards -->
+                <div class="stats-grid" id="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👨‍💼</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="total-employees">0</div>
+                            <div class="stat-label">Total Employees</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏢</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="total-departments">0</div>
+                            <div class="stat-label">Departments</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔍</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="filtered-count">0</div>
+                            <div class="stat-label">Showing</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search and Filter Controls -->
+                <div class="controls-section">
+                    <div class="controls-card">
+                        <div class="search-section">
+                            <div class="search-wrapper">
+                                <span class="search-icon">🔍</span>
+                                <input type="text" id="search-input" placeholder="Search employees by name or email..." class="search-input">
+                                <button id="clear-search" class="clear-search hidden">×</button>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-section">
+                            <button id="filter-btn" class="btn btn-secondary btn-filter">
+                                <span class="btn-icon">⚙️</span>
+                                Filters
+                                <span class="filter-badge hidden" id="filter-badge">0</span>
+                            </button>
+                            <div class="sort-wrapper">
+                                <select id="sort-select" class="sort-select">
+                                    <option value="">Sort by...</option>
+                                    <option value="firstName-asc">First Name (A-Z)</option>
+                                    <option value="firstName-desc">First Name (Z-A)</option>
+                                    <option value="lastName-asc">Last Name (A-Z)</option>
+                                    <option value="lastName-desc">Last Name (Z-A)</option>
+                                    <option value="department-asc">Department (A-Z)</option>
+                                    <option value="department-desc">Department (Z-A)</option>
+                                    <option value="email-asc">Email (A-Z)</option>
+                                    <option value="email-desc">Email (Z-A)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Panel -->
+                    <div id="filter-panel" class="filter-panel hidden">
+                        <div class="filter-header">
+                            <h3>Advanced Filters</h3>
+                            <button id="close-filter" class="close-filter">×</button>
+                        </div>
+                        <div class="filter-form">
+                            <div class="filter-group">
+                                <label for="filter-firstName">First Name</label>
+                                <input type="text" id="filter-firstName" placeholder="Enter first name..." class="filter-input">
+                            </div>
+                            <div class="filter-group">
+                                <label for="filter-department">Department</label>
+                                <select id="filter-department" class="filter-select">
+                                    <option value="">All Departments</option>
+                                    <option value="HR">Human Resources</option>
+                                    <option value="IT">Information Technology</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Marketing">Marketing</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="filter-role">Role</label>
+                                <select id="filter-role" class="filter-select">
+                                    <option value="">All Roles</option>
+                                    <option value="Manager">Manager</option>
+                                    <option value="Developer">Developer</option>
+                                    <option value="Analyst">Analyst</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="filter-actions">
+                            <button id="apply-filter-btn" class="btn btn-primary">Apply Filters</button>
+                            <button id="clear-filter-btn" class="btn btn-secondary">Clear All</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employee List Container -->
+                <div class="employee-section">
+                    <div id="employee-list-container" class="employee-grid">
+                        <!-- Employees will be rendered here by JavaScript -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-section">
+                        <div class="pagination-card">
+                            <div class="pagination-info">
+                                <div class="items-per-page-wrapper">
+                                    <label for="items-per-page">Show:</label>
+                                    <select id="items-per-page" class="items-per-page">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    <span>per page</span>
+                                </div>
+                                <span id="pagination-text" class="pagination-text"></span>
+                            </div>
+                            <div class="pagination-controls">
+                                <button id="prev-btn" class="btn btn-pagination">
+                                    <span>←</span>
+                                    Previous
+                                </button>
+                                <div id="page-numbers" class="page-numbers"></div>
+                                <button id="next-btn" class="btn btn-pagination">
+                                    Next
+                                    <span>→</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Add/Edit Form Modal -->
+        <div id="form-modal" class="modal hidden">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-icon">👤</div>
+                    <h2 id="form-title">Add Employee</h2>
+                    <button id="close-modal" class="close-btn">×</button>
+                </div>
+                <form id="employee-form" class="employee-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required class="form-input">
+                            <span class="error-message" id="firstName-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" required class="form-input">
+                            <span class="error-message" id="lastName-error"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required class="form-input">
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="department">Department <span class="required">*</span></label>
+                            <select id="department" name="department" required class="form-select">
+                                <option value="">Select Department</option>
+                                <option value="HR">Human Resources</option>
+                                <option value="IT">Information Technology</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Marketing">Marketing</option>
+                            </select>
+                            <span class="error-message" id="department-error"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="role">Role <span class="required">*</span></label>
+                            <select id="role" name="role" required class="form-select">
+                                <option value="">Select Role</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Developer">Developer</option>
+                                <option value="Analyst">Analyst</option>
+                            </select>
+                            <span class="error-message" id="role-error"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-icon">💾</span>
+                            Save Employee
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="src/main/resources/static/js/data.js"></script>
+    <script src="src/main/resources/static/js/app.js"></script>
+</body>
+</html>
