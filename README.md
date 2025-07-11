@@ -12,18 +12,7 @@ A modern, responsive web application for managing employee information with full
 ### Method 2: Local HTTP Server
 If you need to test the Freemarker template:
 
-**Using Python:**
-\`\`\`bash
-# Navigate to project directory
-cd employee-directory
 
-# Python 3
-python -m http.server 8000
-
-# Python 2
-python -SimpleHTTPServer 8000
-
-# Open browser to http://localhost:8000
 \`\`\`
 
 **Using Node.js:**
@@ -214,11 +203,7 @@ employee-directory/
 4. **Performance Optimized**: Efficient algorithms and rendering for smooth interactions
 5. **Accessibility**: Full keyboard navigation and screen reader support
 
-## 📞 Support
-
-This project was created as part of the AJACKUS Company Assignment. The implementation demonstrates advanced front-end development skills with a focus on user experience, performance, and maintainable code architecture.
 
 ---
 
-**Note**: This application uses mock data stored in JavaScript arrays. In a production environment, this would be replaced with proper backend API integration and database storage.
 \`\`\`
